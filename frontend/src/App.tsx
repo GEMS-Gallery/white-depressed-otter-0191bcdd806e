@@ -10,6 +10,7 @@ type TaxPayer = {
   firstName: string;
   lastName: string;
   address: string;
+  image?: string;
 };
 
 const App: React.FC = () => {
@@ -39,7 +40,8 @@ const App: React.FC = () => {
       const result = await backend.addTaxPayer(
         newTaxPayer.firstName,
         newTaxPayer.lastName,
-        newTaxPayer.address
+        newTaxPayer.address,
+        newTaxPayer.image ? [newTaxPayer.image] : []
       );
       if ('ok' in result) {
         await fetchTaxPayers();

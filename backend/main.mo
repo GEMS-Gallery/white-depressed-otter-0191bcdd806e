@@ -17,6 +17,7 @@ actor {
     firstName: Text;
     lastName: Text;
     address: Text;
+    image: ?Text; // Optional field for base64 encoded image
   };
 
   // Stable variable to store TaxPayer records
@@ -29,13 +30,14 @@ actor {
   var nextTID : Nat = 1;
 
   // Function to add a new TaxPayer record
-  public func addTaxPayer(firstName: Text, lastName: Text, address: Text) : async Result.Result<Nat, Text> {
+  public func addTaxPayer(firstName: Text, lastName: Text, address: Text, image: ?Text) : async Result.Result<Nat, Text> {
     let tid = nextTID;
     let taxPayer : TaxPayer = {
       tid = tid;
       firstName = firstName;
       lastName = lastName;
       address = address;
+      image = image;
     };
     taxPayers.put(tid, taxPayer);
     nextTID += 1;

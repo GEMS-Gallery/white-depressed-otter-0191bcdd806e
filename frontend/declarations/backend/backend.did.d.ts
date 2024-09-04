@@ -7,11 +7,12 @@ export type Result = { 'ok' : bigint } |
 export interface TaxPayer {
   'tid' : bigint,
   'address' : string,
+  'image' : [] | [string],
   'lastName' : string,
   'firstName' : string,
 }
 export interface _SERVICE {
-  'addTaxPayer' : ActorMethod<[string, string, string], Result>,
+  'addTaxPayer' : ActorMethod<[string, string, string, [] | [string]], Result>,
   'getAllTaxPayers' : ActorMethod<[], Array<TaxPayer>>,
   'getTaxPayerByTID' : ActorMethod<[bigint], [] | [TaxPayer]>,
 }

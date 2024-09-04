@@ -6,6 +6,7 @@ type TaxPayer = {
   firstName: string;
   lastName: string;
   address: string;
+  image?: string;
 };
 
 type Props = {
@@ -22,6 +23,7 @@ const TaxPayerList: React.FC<Props> = ({ taxPayers }) => {
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
             <TableCell>Address</TableCell>
+            <TableCell>Image</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,6 +33,11 @@ const TaxPayerList: React.FC<Props> = ({ taxPayers }) => {
               <TableCell>{taxPayer.firstName}</TableCell>
               <TableCell>{taxPayer.lastName}</TableCell>
               <TableCell>{taxPayer.address}</TableCell>
+              <TableCell>
+                {taxPayer.image && (
+                  <img src={taxPayer.image} alt="Taxpayer" style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                )}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

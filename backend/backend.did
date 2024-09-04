@@ -2,6 +2,7 @@ type TaxPayer =
  record {
    address: text;
    firstName: text;
+   image: opt text;
    lastName: text;
    tid: nat;
  };
@@ -11,7 +12,7 @@ type Result =
    ok: nat;
  };
 service : {
-  addTaxPayer: (text, text, text) -> (Result);
+  addTaxPayer: (text, text, text, opt text) -> (Result);
   getAllTaxPayers: () -> (vec TaxPayer) query;
   getTaxPayerByTID: (nat) -> (opt TaxPayer) query;
 }

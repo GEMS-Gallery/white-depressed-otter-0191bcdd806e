@@ -3,11 +3,16 @@ export const idlFactory = ({ IDL }) => {
   const TaxPayer = IDL.Record({
     'tid' : IDL.Nat,
     'address' : IDL.Text,
+    'image' : IDL.Opt(IDL.Text),
     'lastName' : IDL.Text,
     'firstName' : IDL.Text,
   });
   return IDL.Service({
-    'addTaxPayer' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [Result], []),
+    'addTaxPayer' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text)],
+        [Result],
+        [],
+      ),
     'getAllTaxPayers' : IDL.Func([], [IDL.Vec(TaxPayer)], ['query']),
     'getTaxPayerByTID' : IDL.Func([IDL.Nat], [IDL.Opt(TaxPayer)], ['query']),
   });

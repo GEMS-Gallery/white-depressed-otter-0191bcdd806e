@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box } from '@mui/material';
 
@@ -6,6 +6,7 @@ type TaxPayer = {
   firstName: string;
   lastName: string;
   address: string;
+  image?: string;
 };
 
 type Props = {
@@ -14,10 +15,23 @@ type Props = {
 
 const TaxPayerForm: React.FC<Props> = ({ onAddTaxPayer }) => {
   const { control, handleSubmit, reset } = useForm<TaxPayer>();
+  const [image, setImage] = useState<string | null>(null);
 
   const onSubmit = (data: TaxPayer) => {
-    onAddTaxPayer(data);
+    onAddTaxPayer({ ...data, image: image || undefined });
     reset();
+    setImage(null);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -65,6 +79,14 @@ const TaxPayerForm: React.FC<Props> = ({ onAddTaxPayer }) => {
             />
           )}
         />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+        {image && (
+          <img src={image} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+        )}
         <Button type="submit" variant="contained" color="primary">
           Add TaxPayer
         </Button>
