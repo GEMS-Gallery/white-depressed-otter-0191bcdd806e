@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 type TaxPayer = {
   tid: bigint;
@@ -7,6 +8,7 @@ type TaxPayer = {
   lastName: string;
   address: string;
   image?: string;
+  sunnyDay: boolean;
 };
 
 type Props = {
@@ -24,6 +26,7 @@ const TaxPayerList: React.FC<Props> = ({ taxPayers }) => {
             <TableCell>Last Name</TableCell>
             <TableCell>Address</TableCell>
             <TableCell>Image</TableCell>
+            <TableCell>Sunny Day</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,6 +40,9 @@ const TaxPayerList: React.FC<Props> = ({ taxPayers }) => {
                 {taxPayer.image && (
                   <img src={taxPayer.image} alt="Taxpayer" style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
                 )}
+              </TableCell>
+              <TableCell>
+                {taxPayer.sunnyDay && <WbSunnyIcon style={{ color: '#f39c12' }} />}
               </TableCell>
             </TableRow>
           ))}

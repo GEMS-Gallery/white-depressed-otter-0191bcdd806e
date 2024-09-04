@@ -4,6 +4,7 @@ type TaxPayer =
    firstName: text;
    image: opt text;
    lastName: text;
+   sunnyDay: bool;
    tid: nat;
  };
 type Result = 
@@ -12,7 +13,7 @@ type Result =
    ok: nat;
  };
 service : {
-  addTaxPayer: (text, text, text, opt text) -> (Result);
+  addTaxPayer: (text, text, text, opt text, bool) -> (Result);
   getAllTaxPayers: () -> (vec TaxPayer) query;
   getTaxPayerByTID: (nat) -> (opt TaxPayer) query;
 }

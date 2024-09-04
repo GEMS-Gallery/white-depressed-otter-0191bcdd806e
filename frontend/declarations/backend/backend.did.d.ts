@@ -6,13 +6,17 @@ export type Result = { 'ok' : bigint } |
   { 'err' : string };
 export interface TaxPayer {
   'tid' : bigint,
+  'sunnyDay' : boolean,
   'address' : string,
   'image' : [] | [string],
   'lastName' : string,
   'firstName' : string,
 }
 export interface _SERVICE {
-  'addTaxPayer' : ActorMethod<[string, string, string, [] | [string]], Result>,
+  'addTaxPayer' : ActorMethod<
+    [string, string, string, [] | [string], boolean],
+    Result
+  >,
   'getAllTaxPayers' : ActorMethod<[], Array<TaxPayer>>,
   'getTaxPayerByTID' : ActorMethod<[bigint], [] | [TaxPayer]>,
 }

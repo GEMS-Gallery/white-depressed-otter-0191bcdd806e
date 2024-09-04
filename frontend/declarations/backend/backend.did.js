@@ -2,6 +2,7 @@ export const idlFactory = ({ IDL }) => {
   const Result = IDL.Variant({ 'ok' : IDL.Nat, 'err' : IDL.Text });
   const TaxPayer = IDL.Record({
     'tid' : IDL.Nat,
+    'sunnyDay' : IDL.Bool,
     'address' : IDL.Text,
     'image' : IDL.Opt(IDL.Text),
     'lastName' : IDL.Text,
@@ -9,7 +10,7 @@ export const idlFactory = ({ IDL }) => {
   });
   return IDL.Service({
     'addTaxPayer' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text)],
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Bool],
         [Result],
         [],
       ),

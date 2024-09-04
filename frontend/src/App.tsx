@@ -11,6 +11,7 @@ type TaxPayer = {
   lastName: string;
   address: string;
   image?: string;
+  sunnyDay: boolean;
 };
 
 const App: React.FC = () => {
@@ -41,7 +42,8 @@ const App: React.FC = () => {
         newTaxPayer.firstName,
         newTaxPayer.lastName,
         newTaxPayer.address,
-        newTaxPayer.image ? [newTaxPayer.image] : []
+        newTaxPayer.image ? [newTaxPayer.image] : [],
+        newTaxPayer.sunnyDay
       );
       if ('ok' in result) {
         await fetchTaxPayers();
@@ -74,9 +76,9 @@ const App: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: 4, backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: 3, borderRadius: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          TaxPayer Management System
+          TaxPayer Management System - Fun in the Sun!
         </Typography>
         <SearchBar onSearch={handleSearch} />
         <TaxPayerForm onAddTaxPayer={handleAddTaxPayer} />

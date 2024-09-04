@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Checkbox, FormControlLabel } from '@mui/material';
 
 type TaxPayer = {
   firstName: string;
   lastName: string;
   address: string;
   image?: string;
+  sunnyDay: boolean;
 };
 
 type Props = {
@@ -87,6 +88,17 @@ const TaxPayerForm: React.FC<Props> = ({ onAddTaxPayer }) => {
         {image && (
           <img src={image} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
         )}
+        <Controller
+          name="sunnyDay"
+          control={control}
+          defaultValue={false}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} />}
+              label="Sunny Day"
+            />
+          )}
+        />
         <Button type="submit" variant="contained" color="primary">
           Add TaxPayer
         </Button>

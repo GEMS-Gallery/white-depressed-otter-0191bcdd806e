@@ -1,3 +1,4 @@
+import Bool "mo:base/Bool";
 import Func "mo:base/Func";
 import Hash "mo:base/Hash";
 import Iter "mo:base/Iter";
@@ -17,7 +18,8 @@ actor {
     firstName: Text;
     lastName: Text;
     address: Text;
-    image: ?Text; // Optional field for base64 encoded image
+    image: ?Text;
+    sunnyDay: Bool;
   };
 
   // Stable variable to store TaxPayer records
@@ -30,7 +32,7 @@ actor {
   var nextTID : Nat = 1;
 
   // Function to add a new TaxPayer record
-  public func addTaxPayer(firstName: Text, lastName: Text, address: Text, image: ?Text) : async Result.Result<Nat, Text> {
+  public func addTaxPayer(firstName: Text, lastName: Text, address: Text, image: ?Text, sunnyDay: Bool) : async Result.Result<Nat, Text> {
     let tid = nextTID;
     let taxPayer : TaxPayer = {
       tid = tid;
@@ -38,6 +40,7 @@ actor {
       lastName = lastName;
       address = address;
       image = image;
+      sunnyDay = sunnyDay;
     };
     taxPayers.put(tid, taxPayer);
     nextTID += 1;
